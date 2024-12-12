@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'Classic Console Neue';
+  src: url('fonts/clacon2.woff2') format('woff2');
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2em;
+  box-sizing: border-box;
+}
+
+.header-item {
+  background-color: black;
+  padding: 5px 15px;
+  border: 2px solid white;
+  border-radius: 0.25rem;
+}
+
+.header-item-value {
+  font-weight: 400;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+}
+
+#console {
+  background-color: black;
+  height: 35rem;
+  width: 60rem;
+  border: 2px solid white;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  overflow: hidden;
+  white-space: pre-line;
+  font-family: Classic Console Neue;
+  font-size: 1.5rem;
+}
+
+#input {
+  height: 5rem;
+  width: 60rem;
+  border: 2px solid white;
+  border-radius: 1rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  text-indent: 1rem;
+  background-color: black;
+  color: white;
+}
+
+#input-symbol {
+  position: absolute;
+}
+
+#credits {
+  color: lightgrey;
+  font-weight: 500;
+}
