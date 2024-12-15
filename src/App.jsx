@@ -55,7 +55,10 @@ const App = () => {
   }, [finalInput]);
 
   const handleTimerEnd = () => {
-    if (initRef.current) setShowGameOver(true);
+    if (initRef.current) {
+      setShowGameOver(true);
+      setDisableInput(true);
+    };
   }
 
   return (
