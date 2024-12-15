@@ -1,0 +1,143 @@
+{
+    "locations": [
+        {
+            "name": "INSIDE VAULT",
+            "description": "You step into the room, and the sight is overwhelming. Piles of gold bars, their polished surfaces gleaming in the dim light, are neatly stacked on sturdy metal shelves. Bundles of cash, wrapped in crisp bands, exude an almost intoxicating aura of wealth. The faint metallic scent of riches lingers in the air, mixed with the cold, mechanical hum of the air conditioning. \n\nYOU WIN.",
+            "position": 0,
+            "accessibleBy": ["S"],
+            "locked": true,
+            "contains": []
+        },
+        {
+            "name": "VAULT ROOM",
+            "description": "Before you stands the vault door—a monolith of polished steel and unyielding security. Its circular design is adorned with intricate locking mechanisms, glowing faintly from small indicator lights. The room is sterile and cold, its silence deafening, save for the faint hum of machinery. A keypad blinks expectantly on the wall, daring you to test your skill—or your nerve. The weight of the room's purpose bears down on you; this is the point of no return.",
+            "position": 4,
+            "accessibleBy": ["N", "E"],
+            "contains": []
+        },
+        {
+            "name": "HALLWAY",
+            "description": "The corridors are narrow and eerily quiet, their silence broken only by the faint hum of fluorescent lights overhead. The linoleum floor reflects a dull sheen, amplifying the sense of emptiness. Shadows flicker at the edge of your vision as you move, each turn feeling like it could lead to salvation—or disaster. A faint chemical scent lingers, likely from a janitor's recent cleaning, but it only heightens the tension. Every creak underfoot makes you hold your breath.",
+            "position": 5,
+            "accessibleBy": ["E", "S", "W"],
+            "contains": []
+        },
+        {
+            "name": "CCTV ROOM",
+            "description": "The room is bathed in a dim, unnatural glow from the wall of monitors before you. Each screen flickers, displaying grainy feeds of the bank's various rooms and corridors. The faint hum of electronic equipment vibrates in the air, mingling with the occasional crackle of static. The scent of heated plastic and stale coffee is stifling. The room feels oppressive, like an omnipresent eye keeping watch over every corner of the bank. A single wrong move here could shatter your anonymity.",
+            "position": 6,
+            "accessibleBy": ["E", "W"],
+            "locked": true,
+            "contains": []
+        },
+        {
+            "name": "SERVER ROOM",
+            "description": "The air is frigid, a by-product of the relentless cooling fans keeping the bank's servers operational. Tall racks of blinking machines form a metallic maze, their lights pulsing rhythmically like a heartbeat. The hum of data processing fills the room, almost drowning out your own thoughts. Shadows shift unnaturally in the dim blue glow, and the sterile smell of ozone and metal lingers heavily. \nA hacking device lays on a shelf.",
+            "position": 7,
+            "accessibleBy": ["W"],
+            "contains": [
+                {
+                    "name": "SHELF",
+                    "description": "The hacking device rests on a dusty metal shelf, its smooth, futuristic casing standing out against the worn, cluttered surroundings. A faint glow from its interface pulses rhythmically, hinting at the power it holds. Compact and efficient, it promises a quiet, swift break into the vault.",
+                    "isInspected": false,
+                    "items": ["HACKING DEVICE"]
+                }
+            ]
+        },
+        {
+            "name": "LOCKERS",
+            "description": "Rows of dented grey lockers stretch along the walls, their surfaces scarred with years of use. The air smells faintly of sweat and rust, with a hint of stale deodorant. Some lockers are locked, their contents can be seen through the hole, revealing mundane employee belongings or tantalizing tools that could aid your heist. The silence is heavy here, broken only by the occasional metallic clink as you search for something useful.",
+            "position": 8,
+            "accessibleBy": ["E"],
+            "contains": [
+                {
+                    "name": "LOCKER",
+                    "description": "You wedge the crowbar into the locker door panel and start prying. \n\nThe lock finally gives way and the locker door swings wide open. Inside the locker lays a suppressor for an old pistol and a key with a small tag attached, bearing the words CCTV Room in faded ink.",
+                    "isInspected": false,
+                    "needsInteraction": true,
+                    "interactionTool": "CROWBAR",
+                    "interactionHint": "\nYou take a closer look through the locker vent.\nYou can make out what seems to be a suppressor and some metal object.\n\nYou'll need something to break open this locker.",
+                    "items": ["KEY", "SUPPRESSOR"]
+                }
+            ]
+            
+        },
+        {
+            "name": "LOBBY",
+            "description": "The grand expanse of the lobby is designed to impress, but now it feels oppressive. Polished marble floors and towering columns speak of wealth and power, while a tasteful chandelier casts a warm glow over the space. The faint scent of leather and paper lingers, blending with the metallic tang of fear emanating from the hostages lying prone on the ground. Every sound—whether a whimper from the hostages or the ticking of the ornate clock on the wall—feels deafening in the tension-filled silence.",
+            "position": 9,
+            "accessibleBy": ["N", "S", "W"],
+            "contains": []
+        },
+        {
+            "name": "LOADING BAY (WEST)",
+            "description": "An armoured van rests silently in the cavernous space, its matte exterior exuding an air of quiet menace. The stillness is heavy, broken only by the faint hum of fluorescent lights overhead. The scent of motor oil lingers in the air, mingling with the faint metallic tang of reinforced steel. The concrete floor is streaked with tire marks and oil stains, a testament to countless departures. This is your fortress on wheels, your escape plan—but the open space feels exposed, as if unseen eyes could pierce through the shadows at any moment.",
+            "position": 13,
+            "accessibleBy": ["N", "E"],
+            "contains": [
+                {
+                    "name": "VAN",
+                    "description": "You open the van door. \n\nA pistol lays on the floor inside the van.",
+                    "isInspected": false,
+                    "needsInteraction": true,
+                    "interactionHint": "The van door is slightly ajar. \nTry opening it to look inside.",
+                    "items": ["OLD PISTOL"]
+                }
+            ]
+        },
+        {
+            "name": "LOADING BAY (EAST)",
+            "description": "The space feels vast and empty, its silence broken only by the faint drip of water somewhere in the distance. Potential heist tools are scattered across a sturdy workbench. The air carries the sharp tang of grease and rust. The room feels like a trap, a hollow promise of escape. The distant echo of your own footsteps serves as a stark reminder: you're running out of time.",
+            "position": 14,
+            "accessibleBy": ["W"],
+            "contains": [
+                {
+                    "name": "WORKBENCH",
+                    "description": "You approach the sturdy workbench. \n\nIts surface scarred from years of hard use. Deep grooves and burn marks crisscross the thick wooden top. Dominating the table is a massive vault drill, its steel frame gleaming dully under the workshop's harsh light. The drill's motor casing is smeared with grease, and its heavy, reinforced bit looks capable of chewing through anything in its path. Beside it lies a crowbar, its chipped paint revealing raw, scarred metal beneath. The tools reek of utility, each radiating a quiet, dangerous purpose as you inspect them.",
+                    "isInspected": false,
+                    "needsInteraction": false,
+                    "items": ["VAULT DRILL", "CROWBAR"]
+                }
+            ]
+        }
+    ],
+    "items": [
+        {
+            "name": "OLD PISTOL",
+            "description": "The pistol is a battered, old revolver with a scratched wooden grip and a dull, blued barrel. The heavy cylinder clicks ominously when spun, and its rugged design suggests it has seen its fair share of close encounters. Compact and unassuming, it's perfect for intimidation—and deadly when precision is required.",
+            "weight": 1,
+            "origin": "VAN",
+            "suppressorAttached": false
+        },
+        {
+            "name": "VAULT DRILL",
+            "description": "The vault drill is a heavy-duty tool built to breach secure doors, with a diamond-tipped bit and a powerful motor. Loud and slow, it gets the job done but demands patience and vigilance. \n\nThis item takes up two inventory slots.",
+            "weight": 2,
+            "origin": "WORKBENCH"
+        },
+        {
+            "name": "CROWBAR",
+            "description": "The crowbar is a sturdy, versatile tool perfect for prying open doors. Silent and reliable, it's ideal for quick access but lacks the finesse for heavily secured locks.",
+            "weight": 1,
+            "origin": "WORKBENCH"
+        },
+        {
+            "name": "HACKING DEVICE",
+            "description": "The hacking device has a smooth, futuristic casing standing out against the worn, cluttered surroundings. A faint glow from its interface pulses rhythmically, hinting at the power it holds. Compact and efficient, it promises a quiet, swift break into the vault",
+            "weight": 2,
+            "origin": "SHELF"
+        },
+        {
+            "name": "KEY",
+            "description": "The key is a simple, worn metal piece with a small tag attached, bearing the words CCTV Room in faded ink. Its unassuming appearance belies the access it grants to a crucial part of the building.",
+            "weight": 1,
+            "origin": "LOCKER"
+        },
+        {
+            "name": "SUPPRESSOR",
+            "description": "The suppressor is a sleek, cylindrical attachment with a matte black finish, designed to muffle gunfire. Compact and unassuming, it's an essential tool for taking out guards silently.",
+            "weight": 1,
+            "origin": "LOCKER"
+        }
+    ]
+}

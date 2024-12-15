@@ -1,10 +1,17 @@
-import React, {useState, useEffect, useRef} from 'react'
-import parser from './utils/parser/parser.js'
+import {useState, useEffect, useRef} from 'react'
+import PropTypes from 'prop-types';
 
-function Interface() {
+function Interface({ consoleTextContent, setFinalInput, disableInput, gameOver }) {
+
+  Interface.propTypes = {
+    consoleTextContent: PropTypes.string.isRequired,
+    setFinalInput: PropTypes.func.isRequired,
+    disableInput: PropTypes.bool.isRequired,
+    gameOver: PropTypes.bool.isRequired
+  }
 
   const [inputPlaceholder, setInputPlaceholder] = useState("");
-  const fullText = "Welcome to Bank Heist...";
+  const fullText = "Input command...";
   const speed = 200; // Speed for typing (milliseconds per character)
   const waitTime = 3000; // Wait time before restarting (milliseconds)
 
@@ -33,8 +40,7 @@ function Interface() {
     return () => clearInterval(typingInterval); // Cleanup interval
   }, []); // Empty dependency array to run once
 
-  const [userInput, setUserInput] = useState('')
-  const [consoleTextContent, setConsoleTextContent] = useState('')
+  const [userInput, setUserInput] = useState('');
   const consoleRef = useRef(null)
 
   const handleInputChange = (event) => {
@@ -44,12 +50,8 @@ function Interface() {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
         if (consoleTextContent !== null) {
-            console.log(consoleTextContent)
-            console.log('Enter key pressed')
-            console.log(userInput)
-            let parseOutput = parser.parse(userInput)
-            setConsoleTextContent((prevTextContent) => `${prevTextContent} ${userInput} \n ${parseOutput.toString()} \n\n`)
-            // console.log(consoleTextContent)
+            console.log(`Enter key pressed. User Input: ${userInput}`)
+            setFinalInput(userInput)
             setUserInput('')
         }
     }
@@ -62,20 +64,21 @@ function Interface() {
     
   return (
     <>
-        <div id="content">
-            <div id="console" ref={consoleRef}>{consoleTextContent}</div>
-            <div id="input-container">
-                <input 
-                    id="input" 
-                    type="text" 
-                    placeholder={inputPlaceholder} 
-                    value={userInput} 
-                    onKeyDown={handleKeyDown} 
-                    onChange={handleInputChange}
-                />
-                <span id="input-symbol">&gt;</span>
-            </div>
+      <div id="content">
+        <div id="console" ref={consoleRef}>{consoleTextContent}</div>
+        <div id="input-container">
+          <input 
+            id="input" 
+            type="text" 
+            placeholder={disableInput ? "Game over..." : inputPlaceholder} 
+            value={userInput} 
+            onKeyDown={handleKeyDown} 
+            onChange={handleInputChange}
+            disabled={disableInput}
+          />
+          {/* <span id="input-symbol">&gt;</span> */}
         </div>
+      </div>
     </>
   )
 }

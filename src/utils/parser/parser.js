@@ -18,11 +18,11 @@ class Parser {
         var toParse = this.aliases.apply(result.cleanInput);
 
         [result.word1, toParse] = this.popVerb(toParse);
-        result.word2 = this.popFiller(toParse);
-        result.word3 = this.popFiller(toParse);
+        [result.word2, toParse] = this.popFiller(toParse);
+        [result.word3, toParse] = this.popFiller(toParse);
         [result.word4, result.word4Confident, toParse] = this.popNoun(toParse);
-        result.word5 = this.popFiller(toParse);
-        result.word6 = this.popFiller(toParse);
+        [result.word5, toParse] = this.popFiller(toParse);
+        [result.word6, toParse] = this.popFiller(toParse);
         [result.word7, result.word7Confident, toParse] = this.popNoun(toParse);
       
         if (result.word4) {
@@ -52,12 +52,13 @@ class Parser {
     }
 
     popFiller(toParse) {
-        for (const f of this.fillers.sort((a, b) => b.toString().length - a.toString().length)) {
+        for (const f of [...this.fillers].sort((a, b) => b.toString().length - a.toString().length)) {
             if (toParse === f.value || toParse.startsWith(f.value + " ")) {
-                return f;
+                toParse = toParse.substring(f.value.length).trim();
+                return [f, toParse];
             }
         }
-        return null;
+        return [null, toParse];
     }
 
     popNoun(toParse) {
@@ -112,16 +113,18 @@ class Parser {
 function createParser() {
     const parser = new Parser();
   
-    parser.addVerbs("GO", "OPEN", "CLOSE", "GIVE", "SHOW", "LOOK", "INVENTORY", "GET", "TAKE", "DROP", "USE");
-    parser.addImportantFillers("TO", "ON", "IN");
-    parser.addUnimportantFillers("THE", "A", "AN", "AT");
-    parser.addNouns("NORTH", "EAST", "WEST", "SOUTH", "GREEN DOOR", "BLUE DOOR", "SKELETON KEY", "GOLD KEY");
+    parser.addVerbs("GO", "OPEN", "LOOK", "INSPECT", "INVENTORY", "TAKE", "DROP", "USE", "SHOOT", "THREATEN", "ATTACH");
+    parser.addImportantFillers("TO", "ON", "IN", "WITH", "INSIDE");
+    parser.addUnimportantFillers("THE", "A", "AN", "AT", "OF", "UP");
+    parser.addNouns("NORTH", "EAST", "WEST", "SOUTH", "OLD PISTOL", "VAULT DRILL", "HACKING DEVICE", "KEY", "SUPPRESSOR", "CROWBAR", "LOCKER", "WORKBENCH", "VAN", "GUARD", "CCTV ROOM", "HOSTAGES", "DOOR", "SHELF");
+
   
-    parser.aliases.add("GO NORTH", "N", "NORTH");
-    parser.aliases.add("GO EAST", "E", "EAST");
-    parser.aliases.add("GO SOUTH", "S", "SOUTH");
-    parser.aliases.add("GO WEST", "W", "WEST");
-    parser.aliases.add("INVENTORY", "I", "INV");
+    parser.aliases.add("GO NORTH", "N", "NORTH", "MOVE NORTH", "MOVE N");
+    parser.aliases.add("GO EAST", "E", "EAST", "MOVE EAST", "MOVE E");
+    parser.aliases.add("GO SOUTH", "S", "SOUTH", "MOVE SOUTH", "MOVE S");
+    parser.aliases.add("GO WEST", "W", "WEST", "MOVE WEST", "MOVE W");
+    parser.aliases.add("INVENTORY", "I", "INV", "OPEN INVENTORY", "OPEN INV", "OPEN I");
+    parser.aliases.add("TAKE", "PICK");
   
     return parser;
 }

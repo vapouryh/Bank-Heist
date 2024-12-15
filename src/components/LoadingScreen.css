@@ -1,0 +1,52 @@
+#loading-screen {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  filter: blur(4px);
+  background-image: url("images/LOADING SCREEN.webp");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+#container {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border: 4px solid white;
+  border-radius: 20px;
+  background-color: black;
+  padding: 2rem;
+  height: auto;
+}
+
+#container h1 {
+  color: rgb(180, 45, 45);
+  font-size: 3rem;
+  line-height: 0%;
+  font-family: Classic Console Neue;
+  text-align: center;
+}
+
+#container button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: black;
+  padding: 10px 20px;
+  color: white;
+  font-size: 2rem;
+  font-family: Classic Console Neue;
+}
+
+#container button:hover {
+  color: rgb(180, 45, 45);
+}
