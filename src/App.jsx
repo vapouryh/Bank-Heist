@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { initGame, handleUserInput } from './utils/logic/game.js';
-import Interface from './components/Interface.jsx';
-import HackingGame from './components/HackingGame.jsx'
-import GameOver from './components/GameOver.jsx';
-import LoadingScreen from './components/LoadingScreen.jsx';
-import CountdownTimer from './components/CountDownTimer.jsx';
+import Interface from './components/Interface';
+import HackingGame from './components/HackingGame'
+import GameOver from './components/GameOver';
+import LoadingScreen from './components/LoadingScreen';
+import CountdownTimer from './components/CountdownTimer';
 
 import './App.css'
 

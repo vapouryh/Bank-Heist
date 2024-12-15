@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './HackingGame.css';
-import CountdownTimer from './CountDownTimer.jsx';
+import CountdownTimer from './CountdownTimer';
 
 const randomIntArrayInRange = (min, max, n = 1) => {
   if (n > max - min + 1) {
