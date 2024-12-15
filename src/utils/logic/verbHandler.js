@@ -76,7 +76,7 @@ export default function handleInput(input, player, locations) {
                 if (itemInItsContainer) container.items.splice(container.items.indexOf(item), 1);
                 return `You pick up the ${item.name.toLowerCase()}.\n`;
 
-            } else throw new Error(`You can't pick up this item. ${(fullNoun(0) !== container?.name) ? "\nTry clearing some inventory space first." : ''}`)
+            } else throw new Error(`You can't pick up this item. ${(fullNoun(0) !== container?.name) ? "\nTry clearing some inventory space first.\n" : ''}`)
         case "DROP":
             const hasItem = player.inventory.includes(item)
             if (!noun.length || !item) throw new Error("Drop what?\n");
@@ -90,9 +90,9 @@ export default function handleInput(input, player, locations) {
             if (!noun.length) throw new Error("Shoot what?\n");
             if (fullNoun(0) !== "GUARD") throw new Error(`You cannot shoot the ${fullNoun(0).toLowerCase()}!\n`);
             if (![5, 6].includes(player.currentLocation.position)) throw new Error(`There is no guard here...\n`);
-            if (!player.findItem("OLD PISTOL").suppressorAttached && player.hostageTimer !== 20) {
-                player.hostageTimer = 20;
-                noSuppressor = "\nWithout the suppressor, the CCTV guard has triggered the panic alarm—hostage compliance is breaking down, and the timer has dropped to 20 seconds.\n"
+            if (!player.findItem("OLD PISTOL").suppressorAttached && player.hostageTimer !== 40) {
+                player.setHostageTimer(40);
+                noSuppressor = "\nWithout the suppressor, the CCTV guard has triggered the panic alarm—hostage compliance is breaking down, and the timer has dropped to 40 seconds.\n"
             }
             if (!player.guardAlive) player.cctvGuardAlive = false;
             player.guardAlive = false;
@@ -102,7 +102,7 @@ export default function handleInput(input, player, locations) {
             if (!noun.length) throw new Error("Threaten what?");
             if (fullNoun(0) !== "HOSTAGES") throw new Error(`Invalid option.`);
             if (player.currentLocation.position !== 9) throw new Error(`There are no hostages here...\nGo to the lobby.`);
-            player.hostageTimer = 30;
+            if (player.findItem("OLD PISTOL").suppressorAttached) player.setHostageTimer(60); else player.setHostageTimer(40)
             return "The hostages cower in fear, their whimpers silenced for now. You've bought yourself some time, but their nerves won't hold forever—stay sharp.\n";
         case "ATTACH":
             if (!noun.length) throw new Error("Attach what?\n")

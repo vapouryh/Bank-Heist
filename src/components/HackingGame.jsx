@@ -19,7 +19,7 @@ const randomIntArrayInRange = (min, max, n = 1) => {
 
 const puzzleArray = randomIntArrayInRange(1, 9, 5);
 
-function HackingGame({ setShowGameOver, setShowHackingGame }) {
+function HackingGame({ setVaultUnlocked, setShowGameOver, setShowHackingGame }) {
   const [flash, setFlash] = useState(false); // Tracks if tiles should be flashing
   const [flashingComplete, setFlashingComplete] = useState(false); // Tracks if flashing is complete
   const [clickedSquares, setClickedSquares] = useState([]); // Tracks squares clicked by the user
@@ -57,6 +57,8 @@ function HackingGame({ setShowGameOver, setShowHackingGame }) {
     ) {
       setTimerRunning(false);
       console.log("Puzzle Success")
+      setTimeout (() => setShowHackingGame(false), 3000);
+      setVaultUnlocked(true);
       setMessage("Success! You replicated the pattern!");
     }
   };

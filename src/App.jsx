@@ -11,9 +11,9 @@ import './App.css'
 const App = () => {
 
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
-  const [showDrillGame, setShowDrillGame] = useState(false);
   const [showHackingGame, setShowHackingGame] = useState(false);
   const [showGameOver, setShowGameOver] = useState(false);
+  const [vaultUnlocked, setVaultUnlocked] = useState(false);
   const [hostageTimer, setHostageTimer] = useState(60);
   const [timerRunning, setTimerRunning] = useState(false);
   const [disableInput, setDisableInput] = useState(false);
@@ -30,7 +30,7 @@ const App = () => {
   useEffect(() => {
 
     if (!initRef.current) {
-      const [initLocation, initOutput] = initGame(setShowDrillGame, setShowHackingGame);
+      const [initLocation, initOutput] = initGame(hostageTimer, setHostageTimer, setShowHackingGame);
       setConsoleTextContent(`${initOutput}\n`);
       setCurrentLocation(initLocation);
       setTimerRunning(true);
@@ -38,7 +38,7 @@ const App = () => {
     }
     if (finalInput && !inputHandledRef.current) {
       try {
-        const [location, output] = handleUserInput(finalInput, setDisableInput, setShowGameOver)
+        const [location, output] = handleUserInput(finalInput, setDisableInput, setShowGameOver, vaultUnlocked)
         setCurrentLocation(location)
         setConsoleTextContent((prevText) => `${prevText} > ${finalInput}\n${output}\n`)
         setFinalInput('')
@@ -55,7 +55,7 @@ const App = () => {
   }, [finalInput]);
 
   const handleTimerEnd = () => {
-    setShowGameOver(true);
+    if (initRef.current) setShowGameOver(true);
   }
 
   return (
@@ -67,11 +67,12 @@ const App = () => {
           <h2 className='header-item'>LOCATION: <span className="header-item-value">{currentLocation}</span></h2>
           <h2 className='header-item'>HOSTAGE TIMER:&nbsp;
             <span className="header-item-value">
-              {!disableInput ? 
+              {!disableInput && !showLoadingScreen && !showHackingGame && !vaultUnlocked ? 
                 <CountdownTimer 
                   initialTime={hostageTimer}
                   isRunning={timerRunning}
                   onTimerEnd={handleTimerEnd}
+                  setHostageTimer={setHostageTimer}
                 />
                 : "00:00"
               }
@@ -86,7 +87,7 @@ const App = () => {
         />
         <p id="credits">Made by <a href='https://github.com/vapouryh' target="_blank">Noah Beckman</a> - 2024</p>
       </div>
-      {showHackingGame && <HackingGame setShowGameOver={setShowGameOver} setShowHackingGame={setShowHackingGame} setDisableInput={setDisableInput}/>}
+      {showHackingGame && <HackingGame setVaultUnlocked={setVaultUnlocked} setShowGameOver={setShowGameOver} setShowHackingGame={setShowHackingGame} setDisableInput={setDisableInput}/>}
       {showGameOver && <GameOver />}
     </>
   )

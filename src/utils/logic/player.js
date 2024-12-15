@@ -1,11 +1,12 @@
 class Player {
-    constructor(locations, items, allContainers, setShowDrillGame, setShowHackingGame) {
+    constructor(locations, items, allContainers, hostageTimer, setHostageTimer, setShowDrillGame, setShowHackingGame) {
         this.inventory = [];
         this.locations = locations;
         this.currentLocation = locations[14];
         this.items = items;
         this.allContainers = allContainers;
-        this.hostageTimer = 30;
+        this.hostageTimer = hostageTimer;
+        this.setHostageTimer = setHostageTimer;
         this.guardAlive = true;
         this.cctvGuardAlive = true;
         this.setShowDrillGame; setShowDrillGame;
@@ -19,7 +20,7 @@ class Player {
             let output = `\n${this.currentLocation.description}\n${floorItems || ''}`;
 
             return output;
-        } else throw new Error("\nThis door is locked. \n\nYou'll need a key for this.")
+        } else throw new Error("\nThis door is locked. \nYou'll need a key for this.\n")
     }
 
     findContainer(containerName) {

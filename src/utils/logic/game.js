@@ -11,7 +11,7 @@ const allContainers = [];
 
 var gameOver = false;
 
-const initGame = (setShowDrillGame, setShowHackingGame) => {
+const initGame = (hostageTimer, setHostageTimer, setShowHackingGame) => {
     data.items.forEach(item => {
         const itemObject = new Item(
             item.name, 
@@ -39,7 +39,7 @@ const initGame = (setShowDrillGame, setShowHackingGame) => {
         locations[location.position] = locationObject;
     });
 
-    player = new Player(locations, items, allContainers, setShowDrillGame, setShowHackingGame);
+    player = new Player(locations, items, allContainers, hostageTimer, setHostageTimer, setShowHackingGame);
     let output = "Welcome to Bank Heist\n"
     output += player.updateLocation(14);
 
@@ -50,13 +50,11 @@ const initGame = (setShowDrillGame, setShowHackingGame) => {
 const checkGameState = (setDisableInput, setShowGameOver) => {
     
     switch (player.currentLocation.position) {
-      case 0:
-        return "You've reached the end. Game Over.";
       case 5:
         if (player.guardAlive) {
           let str = "\nA guard stands at the end of the corridor, and he sees you.\n"
           if (player.inventory.some(item => item.name === "OLD PISTOL")) {
-            str += "You have a chance to fight.\nAct quick... time is ticking!";
+            str += "\nYou have a chance to fight.\nAct quick... time is ticking!\n";
           } else {
             setDisableInput(true);
             setTimeout (() => setShowGameOver(true), 8000);
@@ -66,7 +64,7 @@ const checkGameState = (setDisableInput, setShowGameOver) => {
         }
         break;
       case 6:
-        if (player.hostageTimer === 20 && player.cctvGuardAlive) {
+        if (player.hostageTimer === 40 && player.cctvGuardAlive) {
           if (player.inventory.some(item => item.name === "OLD PISTOL")) {
             return "The CCTV guard swivels in their chair, eyes locking onto you as the panic alarm fills the room.\nAct quick... time is ticking!";
           } else {
@@ -75,13 +73,14 @@ const checkGameState = (setDisableInput, setShowGameOver) => {
             return "\nYou are left with nothing to defend yourself and the guard shoots you.\n";
           }
         }
-        if (player.hostageTimer !== 20) return "The CCTV Guard is facing the screens and doesn't see you.";
+        if (player.hostageTimer !== 40) return "\nThe CCTV Guard is facing the screens and doesn't see you.\n";
         break;
     }
     return "";
 };
 
-const handleUserInput = (input, setDisableInput, setShowGameOver) => {
+const handleUserInput = (input, setDisableInput, setShowGameOver, vaultUnlocked) => {
+  if (vaultUnlocked) locations[0].locked = false;
   let handledInput = handleInput(input, player, locations)
   handledInput += checkGameState(setDisableInput, setShowGameOver);
 

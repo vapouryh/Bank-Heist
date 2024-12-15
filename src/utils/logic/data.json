@@ -32,7 +32,7 @@
         },
         {
             "name": "SERVER ROOM",
-            "description": "The air is frigid, a by-product of the relentless cooling fans keeping the bank's servers operational. Tall racks of blinking machines form a metallic maze, their lights pulsing rhythmically like a heartbeat. The hum of data processing fills the room, almost drowning out your own thoughts. Shadows shift unnaturally in the dim blue glow, and the sterile smell of ozone and metal lingers heavily. \nA hacking device lays on a shelf.",
+            "description": "The air is frigid, a by-product of the relentless cooling fans keeping the bank's servers operational. Tall racks of blinking machines form a metallic maze, their lights pulsing rhythmically like a heartbeat. The hum of data processing fills the room, almost drowning out your own thoughts. Shadows shift unnaturally in the dim blue glow, and the sterile smell of ozone and metal lingers heavily. \n\nA hacking device lays on a shelf.",
             "position": 7,
             "accessibleBy": ["W"],
             "contains": [
@@ -93,7 +93,7 @@
             "contains": [
                 {
                     "name": "WORKBENCH",
-                    "description": "You approach the sturdy workbench. \n\nIts surface scarred from years of hard use. Deep grooves and burn marks crisscross the thick wooden top. Dominating the table is a massive vault drill, its steel frame gleaming dully under the workshop's harsh light. The drill's motor casing is smeared with grease, and its heavy, reinforced bit looks capable of chewing through anything in its path. Beside it lies a crowbar, its chipped paint revealing raw, scarred metal beneath. The tools reek of utility, each radiating a quiet, dangerous purpose as you inspect them.",
+                    "description": "You approach the sturdy workbench. \n\nIts surface scarred from years of hard use. Deep grooves and burn marks crisscross the thick wooden top. On the workbench lies a crowbar, its chipped paint revealing raw, scarred metal beneath. The tools reek of utility, each radiating a quiet, dangerous purpose as you inspect them.",
                     "isInspected": false,
                     "needsInteraction": false,
                     "items": ["VAULT DRILL", "CROWBAR"]

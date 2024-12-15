@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import PropTypes from 'prop-types';
 
-function CountdownTimer({ initialTime, isRunning, onTimerEnd }) {
+function CountdownTimer({ initialTime, isRunning, onTimerEnd, setHostageTimer }) {
 
   CountdownTimer.propTypes = {
     initialTime: PropTypes.number.isRequired, // Time in seconds
     isRunning: PropTypes.bool.isRequired, // Whether the timer is running
-    onTimerEnd: PropTypes.func.isRequired // Callback when the timer ends
+    onTimerEnd: PropTypes.func.isRequired, // Callback when the timer ends
+    setHostageTimer: PropTypes.func.isRequired
   };
 
   const [timeLeft, setTimeLeft] = useState(initialTime * 100); // Initial time in centiseconds
@@ -24,6 +25,7 @@ function CountdownTimer({ initialTime, isRunning, onTimerEnd }) {
     timerId.current = setInterval(() => {
       const elapsed = Date.now() - startTimeRef.current; // Time elapsed in milliseconds
       const remainingTime = initialTime * 1000 - elapsed; // Remaining time in milliseconds
+      if (initialTime !== 8) setHostageTimer(remainingTime / 1000);
 
       if (remainingTime <= 0) {
         clearInterval(timerId.current); // Clear interval when timer ends
