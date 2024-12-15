@@ -27,10 +27,9 @@ const App = () => {
     return `url('images/${location}.webp')`;
   };
 
-  const gameLocations = getLocations();
-  gameLocations.forEach((location) => {
-      const img = new Image();
-      img.src = `images/${location.name}.webp`;
+  getLocations().forEach((location) => {
+    const img = new Image();
+    img.src = `images/${location.name}.webp`;
   });
 
   useEffect(() => {
