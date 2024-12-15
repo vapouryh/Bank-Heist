@@ -23,26 +23,19 @@ const App = () => {
   const initRef = useRef(false);
   const inputHandledRef = useRef(false);
 
-  // const componentDidMount = () => {
-  //   const gameLocations = getLocations();
-  //   gameLocations.forEach((location) => {
-  //       const img = new Image();
-  //       img.src = `images/${location.name}.webp`;
-  //   });
-  // }
-
   const getBackgroundImage = (location) => {
     return `url('images/${location}.webp')`;
   };
 
+  const gameLocations = getLocations();
+  gameLocations.forEach((location) => {
+      const img = new Image();
+      img.src = `images/${location.name}.webp`;
+  });
+
   useEffect(() => {
 
     if (!initRef.current) {
-      const gameLocations = getLocations();
-      gameLocations.forEach((location) => {
-          const img = new Image();
-          img.src = `images/${location.name}.webp`;
-      });
       const [initLocation, initOutput] = initGame(hostageTimer, setHostageTimer, setShowHackingGame);
       setConsoleTextContent(`${initOutput}\n`);
       setCurrentLocation(initLocation);
