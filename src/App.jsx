@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { initGame, handleUserInput } from './utils/logic/game.js';
+import { initGame, handleUserInput, getLocations } from './utils/logic/game.js';
 import Interface from './components/Interface';
 import HackingGame from './components/HackingGame'
 import GameOver from './components/GameOver';
@@ -23,6 +23,14 @@ const App = () => {
   const initRef = useRef(false);
   const inputHandledRef = useRef(false);
 
+  // const componentDidMount = () => {
+  //   const gameLocations = getLocations();
+  //   gameLocations.forEach((location) => {
+  //       const img = new Image();
+  //       img.src = `images/${location.name}.webp`;
+  //   });
+  // }
+
   const getBackgroundImage = (location) => {
     return `url('images/${location}.webp')`;
   };
@@ -30,6 +38,11 @@ const App = () => {
   useEffect(() => {
 
     if (!initRef.current) {
+      const gameLocations = getLocations();
+      gameLocations.forEach((location) => {
+          const img = new Image();
+          img.src = `images/${location.name}.webp`;
+      });
       const [initLocation, initOutput] = initGame(hostageTimer, setHostageTimer, setShowHackingGame);
       setConsoleTextContent(`${initOutput}\n`);
       setCurrentLocation(initLocation);

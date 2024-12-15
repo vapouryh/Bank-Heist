@@ -87,4 +87,6 @@ const handleUserInput = (input, setDisableInput, setShowGameOver, vaultUnlocked)
   return [player.currentLocation.name, handledInput];
 };
 
-export { initGame, handleUserInput };
+const getLocations = () => { return locations; }
+
+export { initGame, handleUserInput, getLocations };
