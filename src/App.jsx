@@ -5,6 +5,8 @@ import HackingGame from './components/HackingGame'
 import GameOver from './components/GameOver';
 import LoadingScreen from './components/LoadingScreen';
 import CountdownTimer from './components/CountdownTimer';
+import Map from './components/Map';
+import Guide from './components/Guide';
 
 import './App.css'
 
@@ -13,6 +15,8 @@ const App = () => {
   const [showLoadingScreen, setShowLoadingScreen] = useState(true);
   const [showHackingGame, setShowHackingGame] = useState(false);
   const [showGameOver, setShowGameOver] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
   const [vaultUnlocked, setVaultUnlocked] = useState(false);
   const [hostageTimer, setHostageTimer] = useState(60);
   const [timerRunning, setTimerRunning] = useState(false);
@@ -93,10 +97,12 @@ const App = () => {
           disableInput={disableInput}
           gameOver={showGameOver}
         />
-        <p id="credits">Made by <a href='https://github.com/vapouryh' target="_blank">Noah Beckman</a> - 2024</p>
+        <p id="credits">Made by <a href='https://github.com/vapouryh' target="_blank">Noah Beckman</a> - 2024  •  <a onClick={setShowMap}>SHOW MAP</a>  •  <a onClick={setShowGuide}>SHOW GUIDE</a></p>
       </div>
       {showHackingGame && <HackingGame setVaultUnlocked={setVaultUnlocked} setShowGameOver={setShowGameOver} setShowHackingGame={setShowHackingGame} setDisableInput={setDisableInput}/>}
       {showGameOver && <GameOver />}
+      {showMap && <Map setShowMap={setShowMap}/>}
+      {showGuide && <Guide setShowGuide={setShowGuide}/>}
     </>
   )
 }

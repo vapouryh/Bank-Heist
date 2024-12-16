@@ -1,0 +1,33 @@
+#map {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border: 4px solid white;
+  border-radius: 20px;
+  background-color: black;
+  padding: 10px;
+}
+
+#map img {
+  height: 45vh;
+}
+
+#map button {
+  margin-bottom: 10px;
+  border: 4px solid white;
+  border-radius: 3px;
+  background-color: black;
+  font-size: 2rem;
+  font-family: Classic Console Neue;
+  text-align: center;
+  cursor: pointer;
+}
+
+#map button:hover {
+  color: rgb(180, 45, 45);
+}
