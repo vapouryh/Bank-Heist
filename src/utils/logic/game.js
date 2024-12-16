@@ -41,6 +41,8 @@ const initGame = (hostageTimer, setHostageTimer, setShowHackingGame) => {
 
     player = new Player(locations, items, allContainers, hostageTimer, setHostageTimer, setShowHackingGame);
     let output = "Welcome to Bank Heist\n"
+    output += "\nThe map, commands and walkthrough can be found at the bottom.\n"
+    output += "Beware... this game is not for the weak.\n"
     output += player.updateLocation(14);
 
     return [player.currentLocation.name, output];

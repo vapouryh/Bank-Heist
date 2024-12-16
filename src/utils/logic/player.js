@@ -18,6 +18,7 @@ class Player {
             this.currentLocation = this.locations[position];
             const floorItems = this.currentLocation.floorItems()
             let output = `\n${this.currentLocation.description}\n${floorItems || ''}`;
+            output += `\nYou can go: ${this.currentLocation.accessibleBy.join(', ')}\n`
 
             return output;
         } else throw new Error("\nThis door is locked. \nYou'll need a key for this.\n")
