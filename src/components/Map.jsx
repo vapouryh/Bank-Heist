@@ -10,7 +10,7 @@ function Map({ setShowMap }) {
     <>
       <div id="map">
         <button onClick={hideMap}>CLOSE MAP</button>
-        <img src="images/MAP.png"></img>
+        <img src="images/MAP.svg"></img>
       </div>
     </>
   );

@@ -47,7 +47,7 @@ const initGame = (hostageTimer, setHostageTimer, setShowHackingGame) => {
 }
 
 
-const checkGameState = (setDisableInput, setShowGameOver) => {
+const checkGameState = (setDisableInput, setShowGameOver, setTimerRunning) => {
     
     switch (player.currentLocation.position) {
       case 5:
@@ -75,14 +75,16 @@ const checkGameState = (setDisableInput, setShowGameOver) => {
         }
         if (player.hostageTimer !== 40) return "\nThe CCTV Guard is facing the screens and doesn't see you.\n";
         break;
+      case 9:
+        setTimerRunning(true);
     }
     return "";
 };
 
-const handleUserInput = (input, setDisableInput, setShowGameOver, vaultUnlocked) => {
+const handleUserInput = (input, setDisableInput, setShowGameOver, vaultUnlocked, setTimerRunning) => {
   if (vaultUnlocked) locations[0].locked = false;
   let handledInput = handleInput(input, player, locations)
-  handledInput += checkGameState(setDisableInput, setShowGameOver);
+  handledInput += checkGameState(setDisableInput, setShowGameOver, setTimerRunning);
 
   return [player.currentLocation.name, handledInput];
 };

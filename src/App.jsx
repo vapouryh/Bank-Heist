@@ -42,12 +42,11 @@ const App = () => {
       const [initLocation, initOutput] = initGame(hostageTimer, setHostageTimer, setShowHackingGame);
       setConsoleTextContent(`${initOutput}\n`);
       setCurrentLocation(initLocation);
-      setTimerRunning(true);
       initRef.current = true;
     }
     if (finalInput && !inputHandledRef.current) {
       try {
-        const [location, output] = handleUserInput(finalInput, setDisableInput, setShowGameOver, vaultUnlocked)
+        const [location, output] = handleUserInput(finalInput, setDisableInput, setShowGameOver, vaultUnlocked, setTimerRunning)
         setCurrentLocation(location)
         setConsoleTextContent((prevText) => `${prevText} > ${finalInput}\n${output}\n`)
         setFinalInput('')
@@ -97,7 +96,7 @@ const App = () => {
           disableInput={disableInput}
           gameOver={showGameOver}
         />
-        <p id="credits">Made by <a href='https://github.com/vapouryh' target="_blank">Noah Beckman</a> - 2024  •  <a onClick={setShowMap}>SHOW MAP</a>  •  <a onClick={setShowGuide}>SHOW GUIDE</a></p>
+        <p id="credits">Made by <a href='https://github.com/vapouryh' target="_blank">Noah Beckman</a> - 2024  •  <a onClick={setShowMap}>SHOW MAP</a>  •  <a onClick={setShowGuide}>SHOW GUIDE</a>   •  <a href='./walkthrough.md' target='_blank'>WALKTHROUGH</a></p>
       </div>
       {showHackingGame && <HackingGame setVaultUnlocked={setVaultUnlocked} setShowGameOver={setShowGameOver} setShowHackingGame={setShowHackingGame} setDisableInput={setDisableInput}/>}
       {showGameOver && <GameOver />}
