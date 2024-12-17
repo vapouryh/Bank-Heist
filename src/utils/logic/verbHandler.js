@@ -101,7 +101,7 @@ export default function handleInput(input, player, locations, hostageTimer, setH
             let output = `\nYou shoot the guard with the old pistol and he drops dead on the floor. \n${noSuppressor ? noSuppressor : ''}`
             return output;
         case "THREATEN":
-            if (!noun.length) throw new Error("Threaten what?");
+            if (!noun.length) throw new Error("Threaten what?\n");
             if (fullNoun(0) !== "HOSTAGES") throw new Error(`Invalid option.`);
             if (player.currentLocation.position !== 9) throw new Error(`There are no hostages here...\nGo to the lobby.`);
             setHostageTimer(player.panicAlarm ? 40 : 60)
