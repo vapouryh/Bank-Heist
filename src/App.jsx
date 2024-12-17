@@ -97,7 +97,7 @@ const App = () => {
           disableInput={disableInput}
           gameOver={showGameOver}
         />
-        <p id="credits">Made by <a href='https://github.com/vapouryh' target="_blank">Noah Beckman</a> - 2024  •  <a onClick={setShowMap}>SHOW MAP</a>  •  <a onClick={setShowGuide}>SHOW GUIDE</a>   •  <a href='./walkthrough.md' target='_blank'>WALKTHROUGH</a></p>
+        <p id="credits"><a onClick={setShowMap}>SHOW MAP</a>  •  <a onClick={setShowGuide}>SHOW GUIDE</a>   •  <a href='./walkthrough.md' target='_blank'>WALKTHROUGH</a><br />Made by <a href='https://github.com/vapouryh' target="_blank">Noah Beckman</a> - 2024</p>
       </div>
       {showHackingGame && <HackingGame setVaultUnlocked={setVaultUnlocked} setShowGameOver={setShowGameOver} setShowHackingGame={setShowHackingGame} setDisableInput={setDisableInput}/>}
       {showGameOver && <GameOver />}
