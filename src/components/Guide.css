@@ -14,8 +14,13 @@
   text-align: left;
 }
 
+#guide h1 {
+  margin: 0.5rem;
+}
+
 #guide p {
   line-height: 0;
+  margin-bottom: 0.5rem;
   text-indent: 1.5rem;
 }
 

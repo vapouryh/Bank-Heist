@@ -1,16 +1,13 @@
 class Player {
-    constructor(locations, items, allContainers, hostageTimer, setHostageTimer, setShowDrillGame, setShowHackingGame) {
+    constructor(locations, items, allContainers) {
         this.inventory = [];
         this.locations = locations;
         this.currentLocation = locations[14];
         this.items = items;
         this.allContainers = allContainers;
-        this.hostageTimer = hostageTimer;
-        this.setHostageTimer = setHostageTimer;
+        this.panicAlarm = false;
         this.guardAlive = true;
         this.cctvGuardAlive = true;
-        this.setShowDrillGame; setShowDrillGame;
-        this.setShowHackingGame = setShowHackingGame;
     }
 
     updateLocation(position) {
@@ -18,7 +15,7 @@ class Player {
             this.currentLocation = this.locations[position];
             const floorItems = this.currentLocation.floorItems()
             let output = `\n${this.currentLocation.description}\n${floorItems || ''}`;
-            output += `\nYou can go: ${this.currentLocation.accessibleBy.join(', ')}\n`
+            if (this.currentLocation.position !== 0) output += `\nYou can go: ${this.currentLocation.accessibleBy.join(', ')}\n`
 
             return output;
         } else throw new Error("\nThis door is locked. \nYou'll need a key for this.\n")

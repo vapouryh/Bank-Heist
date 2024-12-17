@@ -22,6 +22,9 @@ function Guide({ setShowGuide }) {
         <p>{"SHOOT: GUARD"}</p>
         <p>{"THREATEN: HOSTAGES"}</p>
         <p>{"ATTACH: SUPPRESSOR"}</p>
+        <p>{"MAP: OPENS THE MAP"}</p>
+        <p>{"GUIDE: OPENS THE GUIDE"}</p>
+        <p></p>
         <h1 className='bold'>**Threaten the hostages in the lobby so the timer doesn't run out!**</h1>
       </div>
     </>

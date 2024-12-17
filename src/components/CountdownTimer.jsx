@@ -25,7 +25,7 @@ function CountdownTimer({ initialTime, isRunning, onTimerEnd, setHostageTimer })
     timerId.current = setInterval(() => {
       const elapsed = Date.now() - startTimeRef.current; // Time elapsed in milliseconds
       const remainingTime = initialTime * 1000 - elapsed; // Remaining time in milliseconds
-      if (initialTime !== 8) setHostageTimer(remainingTime / 1000);
+      if (initialTime !== 3) setHostageTimer(remainingTime / 1000);
 
       if (remainingTime <= 0) {
         clearInterval(timerId.current); // Clear interval when timer ends

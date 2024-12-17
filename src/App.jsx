@@ -39,18 +39,19 @@ const App = () => {
   useEffect(() => {
 
     if (!initRef.current) {
-      const [initLocation, initOutput] = initGame(hostageTimer, setHostageTimer, setShowHackingGame);
+      const [initLocation, initOutput] = initGame();
       setConsoleTextContent(`${initOutput}\n`);
       setCurrentLocation(initLocation);
       initRef.current = true;
     }
     if (finalInput && !inputHandledRef.current) {
       try {
-        const [location, output] = handleUserInput(finalInput, setDisableInput, setShowGameOver, vaultUnlocked, setTimerRunning)
+        const [location, output] = handleUserInput(finalInput, setDisableInput, setShowGameOver, vaultUnlocked, setTimerRunning, hostageTimer, setHostageTimer, setShowHackingGame, setShowMap, setShowGuide)
         setCurrentLocation(location)
         setConsoleTextContent((prevText) => `${prevText} > ${finalInput}\n${output}\n`)
         setFinalInput('')
       } catch (error) {
+
         setConsoleTextContent((prevText => `${prevText} > ${finalInput}\n${error.message}\n`))
         console.error(error)
       }
@@ -100,8 +101,8 @@ const App = () => {
       </div>
       {showHackingGame && <HackingGame setVaultUnlocked={setVaultUnlocked} setShowGameOver={setShowGameOver} setShowHackingGame={setShowHackingGame} setDisableInput={setDisableInput}/>}
       {showGameOver && <GameOver />}
-      {showMap && <Map setShowMap={setShowMap}/>}
-      {showGuide && <Guide setShowGuide={setShowGuide}/>}
+      {showMap && <Map setShowMap={setShowMap} />}
+      {showGuide && <Guide setShowGuide={setShowGuide} />}
     </>
   )
 }

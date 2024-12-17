@@ -1,6 +1,6 @@
 import parser from '../parser/parser.js';
 
-export default function handleInput(input, player, locations) {
+export default function handleInput(input, player, locations, hostageTimer, setHostageTimer, setShowHackingGame, setShowMap, setShowGuide) {
     const parsedInput = parser.parse(input);
     const verb = parsedInput.importantWords.find(obj => obj.constructor.name === 'Verb') || null;
     const noun = parsedInput.importantWords.filter(obj => obj.constructor.name === 'Noun') || '';
@@ -28,7 +28,9 @@ export default function handleInput(input, player, locations) {
                 }
             }
             if (!container.needsInteraction) throw new Error("You can't open this object.");
-            if (containerInRoom && container.interactionTool && !tool) throw new Error(`You'll need to use a ${container.interactionTool.toLowerCase()} to open the ${container.name.toLowerCase()}!`);
+            if (!container.isInspected) throw new Error(`You need to inspect the ${container.name.toLowerCase()} first.\n`)
+            if (containerInRoom && container.interactionTool && !tool) throw new Error(`You'll need to use a ${container.interactionTool.toLowerCase()} to open the ${container.name.toLowerCase()}!\n`);
+            if (!player.inventory.some(item => item.name === container.interactionTool) && container.interactionTool) throw new Error(`You don't have a ${container.interactionTool.toLowerCase()} in your inventory!\n`)
             if (!containerInRoom) throw new Error(`There is no ${container.name.toLowerCase()} in this room.`);
             container.isInspected = true;
             container.needsInteraction = false;
@@ -68,15 +70,14 @@ export default function handleInput(input, player, locations) {
             
             if (!noun.length) throw new Error("Take what?\n");
             if (!item && !container) throw new Error("Item doesn't exist.\n")
-            if (!itemOnTheFloor && !container) throw new Error("item on the floor cuh");
-            if (!containerInRoom || (itemInItsContainer && !container.isInspected) || (itemInItsContainer && container.needsInteraction)) throw new Error(`You can't see any ${fullNoun(0).toLowerCase()} here!`)
+            if ((itemInItsContainer && !container.isInspected) || (itemInItsContainer && container.needsInteraction)) throw new Error(`You can't see any ${fullNoun(0).toLowerCase()} here!\n`)
             if (item?.weight && player.inventoryWeight + item?.weight <= 4) {
                 player.inventory.push(item);
                 if (itemOnTheFloor) player.currentLocation.contains.splice(player.currentLocation.contains.indexOf(item), 1);
                 if (itemInItsContainer) container.items.splice(container.items.indexOf(item), 1);
                 return `You pick up the ${item.name.toLowerCase()}.\n`;
 
-            } else throw new Error(`You can't pick up this item. ${(fullNoun(0) !== container?.name) ? "\nTry clearing some inventory space first.\n" : ''}`)
+            } else throw new Error(`You can't pick up this item. ${(fullNoun(0) !== container?.name) ? "\nTry clearing some inventory space first.\n" : ''}\n`)
         case "DROP":
             const hasItem = player.inventory.includes(item)
             if (!noun.length || !item) throw new Error("Drop what?\n");
@@ -90,8 +91,9 @@ export default function handleInput(input, player, locations) {
             if (!noun.length) throw new Error("Shoot what?\n");
             if (fullNoun(0) !== "GUARD") throw new Error(`You cannot shoot the ${fullNoun(0).toLowerCase()}!\n`);
             if (![5, 6].includes(player.currentLocation.position)) throw new Error(`There is no guard here...\n`);
-            if (!player.findItem("OLD PISTOL").suppressorAttached && player.hostageTimer !== 40) {
-                player.setHostageTimer(40);
+            if (!player.findItem("OLD PISTOL").suppressorAttached && hostageTimer !== 40) {
+                player.panicAlarm = true;
+                setHostageTimer(40);
                 noSuppressor = "\nWithout the suppressor, the CCTV guard has triggered the panic alarm—hostage compliance is breaking down, and the timer has dropped to 40 seconds.\n"
             }
             if (!player.guardAlive) player.cctvGuardAlive = false;
@@ -102,7 +104,8 @@ export default function handleInput(input, player, locations) {
             if (!noun.length) throw new Error("Threaten what?");
             if (fullNoun(0) !== "HOSTAGES") throw new Error(`Invalid option.`);
             if (player.currentLocation.position !== 9) throw new Error(`There are no hostages here...\nGo to the lobby.`);
-            if (player.findItem("OLD PISTOL").suppressorAttached) player.setHostageTimer(60); else player.setHostageTimer(40)
+            setHostageTimer(player.panicAlarm ? 40 : 60)
+            // if (player.findItem("OLD PISTOL").suppressorAttached) player.setHostageTimer(60); else player.setHostageTimer(40)
             return "The hostages cower in fear, their whimpers silenced for now. You've bought yourself some time, but their nerves won't hold forever—stay sharp.\n";
         case "ATTACH":
             if (!noun.length) throw new Error("Attach what?\n")
@@ -118,7 +121,21 @@ export default function handleInput(input, player, locations) {
             if (!player.inventory.some(item => ["VAULT DRILL", "HACKING DEVICE"].includes(item.name))) throw new Error("This item is not in your inventory!\n");
             if (player.currentLocation.position !== 4) throw new Error("This item can only be used in the Vault Room.\n");
             // if (fullNoun(0) === "VAULT DRILL") player.setShowDrillGame(true);
-            if (fullNoun(0) === "HACKING DEVICE") player.setShowHackingGame(true);
+            if (fullNoun(0) === "HACKING DEVICE") {
+                setShowHackingGame(true);
+                return ""
+            }
+        case "MAP":
+            if (!noun.length && !unknownWord) {
+                setShowMap(true);
+                return "";
+            }
+        case "COMMANDS":
+        case "HELP":
+            if (!noun.length && !unknownWord) {
+                setShowGuide(true);
+                return "";
+            }
         default: throw new Error("What?\n")
     }
 }

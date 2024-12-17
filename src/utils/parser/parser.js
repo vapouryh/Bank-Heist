@@ -113,7 +113,7 @@ class Parser {
 function createParser() {
     const parser = new Parser();
   
-    parser.addVerbs("GO", "OPEN", "LOOK", "INSPECT", "INVENTORY", "TAKE", "DROP", "USE", "SHOOT", "THREATEN", "ATTACH");
+    parser.addVerbs("GO", "OPEN", "LOOK", "INSPECT", "INVENTORY", "TAKE", "DROP", "USE", "SHOOT", "THREATEN", "ATTACH", "MAP", "COMMANDS", "HELP");
     parser.addImportantFillers("TO", "ON", "IN", "WITH", "INSIDE");
     parser.addUnimportantFillers("THE", "A", "AN", "AT", "OF", "UP");
     parser.addNouns("NORTH", "EAST", "WEST", "SOUTH", "OLD PISTOL", "VAULT DRILL", "HACKING DEVICE", "KEY", "SUPPRESSOR", "CROWBAR", "LOCKER", "WORKBENCH", "VAN", "GUARD", "CCTV ROOM", "HOSTAGES", "DOOR", "SHELF");
